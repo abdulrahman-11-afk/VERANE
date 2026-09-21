@@ -1,0 +1,2 @@
+import {NextRequest,NextResponse} from 'next/server';import {z} from 'zod';
+const schema=z.object({email:z.string().email()});export async function POST(request:NextRequest){const parsed=schema.safeParse(await request.json());if(!parsed.success)return NextResponse.json({error:{message:'Enter a valid email address'}},{status:400});return NextResponse.json({data:{subscribed:true,email:parsed.data.email}},{status:201})}
